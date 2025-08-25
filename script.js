@@ -9,7 +9,7 @@ const services = [
     { id: 5, name: "Lavadoras y Neveras", icon: "bi-cpu", description: "Reparación de lavadoras, neveras y electrodomésticos", rating: 0 },
     { id: 6, name: "Aire Acondicionado", icon: "bi-snow", description: "Instalación y mantenimiento de AC", rating: 0 },
     { id: 7, name: "Cerrajería", icon: "bi-shield-lock", description: "Cerraduras, llaves y sistemas de seguridad", rating: 0 },
-    { id: 8, name: "Parqueaderos", icon: "bi-car-front", description: "Mantenimiento de garajes y parqueaderos", rating: 0 },
+    // { id: 8, name: "Parqueaderos", icon: "bi-car-front", description: "Mantenimiento de garajes y parqueaderos", rating: 0 },
     { id: 9, name: "Mantenimiento General", icon: "bi-wrench", description: "Reparaciones generales del hogar", rating: 0 }
 ];
 
