@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FixNow - Técnicos de Confianza en tu Conjunto Residencial</title>
-    <meta name="description" content="FixNow conecta residentes con técnicos verificados para reparaciones domiciliarias rápidas y confiables. Lanzamiento 15 de septiembre 2025.">
+    <meta name="description" content="FixNow conecta residentes con técnicos verificados para reparaciones domiciliarias rápidas y confiables. Lanzamiento 30 de septiembre 2025.">
     <meta name="author" content="FixNow">
     <meta name="keywords" content="reparaciones, técnicos, conjuntos residenciales, servicios domiciliarios, plomería, electricidad">
 
@@ -69,7 +69,7 @@
                         </div>
                         <hr class="my-4">
                         <p class="text-center fw-semibold mb-0">
-                            🚀 Lanzamiento oficial: 15 de Septiembre 2025
+                            🚀 Lanzamiento oficial: 30 de Septiembre 2025
                         </p>
                     </div>
                 </div>
@@ -88,6 +88,15 @@
 
                 <!-- Feature Cards -->
                 <div class="row g-4 mx-auto" style="max-width: 900px;">
+
+
+
+
+
+
+
+
+                    
                     <div class="col-md-4">
                         <div class="card h-100 bg-white bg-opacity-90 border-0 shadow">
                             <div class="card-body text-center p-4">
@@ -312,7 +321,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="apartment" class="form-label">Apartamento/Casa</label>
-                                        <input type="text" class="form-control" id="apartment" placeholder="Apt 101 / Casa 15">
+                                        <input type="text" class="form-control" id="apartment" placeholder="Apt 101 / Casa 30">
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -371,7 +380,7 @@
                     </div>
                     <span class="badge bg-accent text-dark px-3 py-2">
                         <i class="bi bi-calendar me-2"></i>
-                        Lanzamiento: 15 Sept 2025
+                        Lanzamiento: 30 Sept 2025
                     </span>
                 </div>
                 <div class="col-md-4">
@@ -415,4 +424,64 @@
     <!-- Custom JS -->
     <script src="script.js"></script>
 </body>
+<!-- Incluye la librería de Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+  const supabaseUrl = 'https://ypprxdephbxzxghonydl.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwcHJ4ZGVwaGJ4enhnaG9ueWRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcwMzE4MzMsImV4cCI6MjA3MjYwNzgzM30.ctGCKj7XOY4gXikUJKAnX8bZIAfB1pIBuV0EFSmRCX4'; // tu key
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('beta-registration-form');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // Captura de campos
+      const nombre = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const telefono = document.getElementById('phone').value.trim();
+      const conjunto = document.getElementById('building').value.trim();
+      const apartamento = document.getElementById('apartment').value.trim();
+      const rol = document.getElementById('role').value;
+      const intereses = document.getElementById('interests').value.trim();
+
+      // Validación básica
+      if (!nombre || !email || !conjunto) {
+        alert('Por favor completa los campos obligatorios.');
+        return;
+      }
+
+      console.log({ nombre, email, telefono, conjunto, apartamento, rol, intereses });
+
+
+      // Insertar en Supabase
+      const { data, error } = await supabase
+        .from('usuarios')
+        .insert([
+          {
+            nombre,
+            email,
+            telefono,
+            conjunto,
+            apartamento,
+            rol,
+            intereses
+          }
+        ]);
+
+      if (error) {
+        console.error('Error al registrar:', error);
+        alert('Error al registrar. Intenta más tarde.');
+      } else {
+        console.log('Lead registrado:', data);
+
+        // Mostrar mensaje de éxito
+        document.getElementById('form-card').classList.add('d-none');
+        document.getElementById('success-card').classList.remove('d-none');
+      }
+    });
+  });
+</script>
+
+
 </html>
