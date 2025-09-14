@@ -205,30 +205,81 @@ function setupFormHandlers() {
 }
 
 // Handle beta form submission
-function handleBetaFormSubmit(e) {
-    e.preventDefault();
+// function handleBetaFormSubmit(e) {
+//     e.preventDefault();
     
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const building = document.getElementById('building').value;
+//     const name = document.getElementById('name').value;
+//     const email = document.getElementById('email').value;
+//     const building = document.getElementById('building').value;
     
-    if (name && email && building) {
-        // Hide form card and show success card
+//     if (name && email && building) {
+//         // Hide form card and show success card
+//         document.getElementById('form-card').classList.add('d-none');
+//         document.getElementById('success-card').classList.remove('d-none');
+        
+//         // Here you would typically send the data to a server
+//         console.log('Beta registration submitted:', {
+//             name,
+//             email,
+//             phone: document.getElementById('phone').value,
+//             building,
+//             apartment: document.getElementById('apartment').value,
+//             role: document.getElementById('role').value,
+//             interests: document.getElementById('interests').value
+//         });
+//     }
+// }
+
+// Manejar el submit del formulario beta
+async function handleBetaFormSubmit(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const building = document.getElementById('building').value;
+  const apartment = document.getElementById('apartment').value;
+  const role = document.getElementById('role').value;
+  const interests = document.getElementById('interests').value;
+
+  if (name && email && building) {
+    try {
+      const response = await fetch("https://ypprxdephbzxghonyld.supabase.co/rest/v1/usuario", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": "sb_publishable_qNW1fE8BMXwDUWyRBfxQ9A_TjQG_dNu",        // ⚠️ Reemplaza con tu apikey
+          "Authorization": "sb_secret_h1j_GvrN_DoW5PSegCRdAg_F4Rx_OGN1hhl47mqd4tzkpxYAdRbSkI0dsOnWqR5m8c" // ⚠️ Reemplaza con tu Authorization (secret o service_role token)
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          building,
+          apartment,
+          role,
+          interests
+        })
+      });
+
+      if (response.ok) {
+        console.log("✅ Usuario registrado con éxito");
         document.getElementById('form-card').classList.add('d-none');
         document.getElementById('success-card').classList.remove('d-none');
-        
-        // Here you would typically send the data to a server
-        console.log('Beta registration submitted:', {
-            name,
-            email,
-            phone: document.getElementById('phone').value,
-            building,
-            apartment: document.getElementById('apartment').value,
-            role: document.getElementById('role').value,
-            interests: document.getElementById('interests').value
-        });
+      } else {
+        const errorData = await response.json();
+        console.error("❌ Error en Supabase:", errorData);
+        alert("Error al registrar: " + JSON.stringify(errorData));
+      }
+    } catch (error) {
+      console.error("⚠️ Error de red:", error);
+      alert("No se pudo conectar al servidor.");
     }
+  } else {
+    alert("Por favor, completa los campos obligatorios.");
+  }
 }
+
 
 // Smooth scroll to section
 function scrollToSection(sectionId) {

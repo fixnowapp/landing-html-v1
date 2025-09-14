@@ -482,6 +482,31 @@
     });
   });
 </script>
+<form id="leadForm">
+  <input type="text" name="nombre" placeholder="Tu nombre" required>
+  <input type="email" name="email" placeholder="Tu email" required>
+  <input type="tel" name="telefono" placeholder="Tu teléfono">
+  <textarea name="mensaje" placeholder="Cuéntanos tu necesidad"></textarea>
+  <button type="submit">Enviar</button>
+</form>
+
+<script>
+  document.getElementById("leadForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    fetch("https://script.google.com/macros/s/AKfycbwXXpzXK4LnQ9NiMQHunAjJtCXyxkrEOt0lhJdMm8isjcgeOibfTX0UxUODSxwNVSc0/exec", {
+      method: "POST",
+      body: JSON.stringify({
+        nombre: this.nombre.value,
+        email: this.email.value,
+        telefono: this.telefono.value,
+        mensaje: this.mensaje.value
+      }),
+      headers: { "Content-Type": "application/json" }
+    }).then(res => alert("✅ Gracias, pronto nos pondremos en contacto!"))
+      .catch(err => alert("❌ Error al enviar, intenta más tarde"));
+  });
+</script>
+
 
 
 </html>
