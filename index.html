@@ -482,30 +482,51 @@
     });
   });
 </script>
-<form id="leadForm">
-  <input type="text" name="nombre" placeholder="Tu nombre" required>
-  <input type="email" name="email" placeholder="Tu email" required>
-  <input type="tel" name="telefono" placeholder="Tu teléfono">
-  <textarea name="mensaje" placeholder="Cuéntanos tu necesidad"></textarea>
-  <button type="submit">Enviar</button>
-</form>
+ <h1>Contáctanos - FixNow</h1>
+
+  <form id="leadForm">
+    <input type="text" name="nombre" placeholder="Tu nombre" required><br><br>
+    <input type="email" name="email" placeholder="Tu email" required><br><br>
+    <input type="tel" name="telefono" placeholder="Tu teléfono"><br><br>
+    <textarea name="mensaje" placeholder="Cuéntanos tu necesidad"></textarea><br><br>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <p id="status" style="font-weight:600"></p>
 
 <script>
-  document.getElementById("leadForm").addEventListener("submit", function(e) {
+  const SUPABASE_URL = "https://pieedcwjgryoaocpmehy.supabase.co"; // cambia aquí
+  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpZWVkY3dqZ3J5b2FvY3BtZWh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc4NzYwODMsImV4cCI6MjA3MzQ1MjA4M30.V_3P_zc1IND_jjTRmKV97T87DFmo_CoqkNgs3R_xFpk"; // cambia aquí (usa la anon public key)
+
+  document.getElementById("leadForm").addEventListener("submit", async function(e) {
     e.preventDefault();
-    fetch("https://script.google.com/macros/s/AKfycbwXXpzXK4LnQ9NiMQHunAjJtCXyxkrEOt0lhJdMm8isjcgeOibfTX0UxUODSxwNVSc0/exec", {
+
+    const data = {
+      nombre: this.nombre.value,
+      email: this.email.value,
+      telefono: this.telefono.value,
+      mensaje: this.mensaje.value
+    };
+
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
       method: "POST",
-      body: JSON.stringify({
-        nombre: this.nombre.value,
-        email: this.email.value,
-        telefono: this.telefono.value,
-        mensaje: this.mensaje.value
-      }),
-      headers: { "Content-Type": "application/json" }
-    }).then(res => alert("✅ Gracias, pronto nos pondremos en contacto!"))
-      .catch(err => alert("❌ Error al enviar, intenta más tarde"));
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+      alert("✅ Gracias, pronto nos pondremos en contacto!");
+      this.reset();
+    } else {
+      alert("❌ Error al enviar, intenta más tarde");
+    }
   });
 </script>
+  <script src="https://sheetdb.io/s/f/0xp3czbb3cws3.js"></script>
 
 
 
