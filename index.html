@@ -299,11 +299,11 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            <form id="beta-registration-form">
+                            <form id="leadForm">
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-6">
-                                        <label for="name" class="form-label">Nombre Completo *</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Tu nombre completo" required>
+                                        <label for="nombre" class="form-label">Nombre Completo *</label>
+                                        <input type="text" class="form-control" id="nombre" placeholder="Tu nombre completo" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="email" class="form-label">Email *</label>
@@ -311,31 +311,31 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="phone" class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control" id="phone" placeholder="+57 300 123 4567">
+                                    <label for="telefono" class="form-label">Teléfono</label>
+                                    <input type="tel" class="form-control" id="telefono" placeholder="+57 300 123 4567">
                                 </div>
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-6">
-                                        <label for="building" class="form-label">Conjunto Residencial *</label>
-                                        <input type="text" class="form-control" id="building" placeholder="Nombre del conjunto" required>
+                                        <label for="conjunto" class="form-label">Conjunto Residencial *</label>
+                                        <input type="text" class="form-control" id="conjunto" placeholder="Nombre del conjunto" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="apartment" class="form-label">Apartamento/Casa</label>
-                                        <input type="text" class="form-control" id="apartment" placeholder="Apt 101 / Casa 30">
+                                        <label for="apartamento" class="form-label">Apartamento/Casa</label>
+                                        <input type="text" class="form-control" id="apartamento" placeholder="Apt 101 / Casa 30">
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="role" class="form-label">¿Eres?</label>
-                                    <select class="form-select" id="role">
+                                    <label for="rol" class="form-label">¿Eres?</label>
+                                    <select class="form-select" id="rol">
                                         <option value="">Selecciona una opción</option>
-                                        <option value="resident">Residente</option>
-                                        <option value="admin">Administrador</option>
-                                        <option value="technician">Técnico/Profesional</option>
+                                        <option value="residente">Residente</option>
+                                        <option value="admin-ph">Administrador Propiedad horizontal</option>
+                                        <option value="tecnico">Técnico/Profesional</option>
                                     </select>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="interests" class="form-label">¿Qué servicios te interesan más?</label>
-                                    <textarea class="form-control" id="interests" rows="3" placeholder="Cuéntanos qué tipos de reparaciones necesitas con más frecuencia..."></textarea>
+                                    <label for="interes" class="form-label">¿Qué servicios te interesan más?</label>
+                                    <textarea class="form-control" id="interes" rows="3" placeholder="Cuéntanos qué tipos de reparaciones necesitas con más frecuencia..."></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-hero w-100 btn-lg">
                                     <i class="bi bi-envelope me-2"></i>
@@ -426,7 +426,7 @@
 </body>
 <!-- Incluye la librería de Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script>
+<!-- <script>
   const supabaseUrl = 'https://ypprxdephbxzxghonydl.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwcHJ4ZGVwaGJ4enhnaG9ueWRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcwMzE4MzMsImV4cCI6MjA3MjYwNzgzM30.ctGCKj7XOY4gXikUJKAnX8bZIAfB1pIBuV0EFSmRCX4'; // tu key
   const supabase = supabase.createClient(supabaseUrl, supabaseKey);
@@ -481,8 +481,8 @@
       }
     });
   });
-</script>
- <h1>Contáctanos - FixNow</h1>
+</script> -->
+ <!-- <h1>Contáctanos - FixNow</h1>
 
   <form id="leadForm">
     <input type="text" name="nombre" placeholder="Tu nombre" required><br><br>
@@ -492,7 +492,7 @@
     <button type="submit">Enviar</button>
   </form>
 
-  <p id="status" style="font-weight:600"></p>
+  <p id="status" style="font-weight:600"></p> -->
 
 <script>
   const SUPABASE_URL = "https://pieedcwjgryoaocpmehy.supabase.co"; // cambia aquí
@@ -505,7 +505,11 @@
       nombre: this.nombre.value,
       email: this.email.value,
       telefono: this.telefono.value,
-      mensaje: this.mensaje.value
+      //mensaje: this.mensaje.value,
+      conjunto: this.conjunto.value,
+      apartamento: this.apartamento.value,
+      rol: this.rol.value,
+      interes: this.interes.value
     };
 
     const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
@@ -526,7 +530,7 @@
     }
   });
 </script>
-  <script src="https://sheetdb.io/s/f/0xp3czbb3cws3.js"></script>
+  <!-- <script src="https://sheetdb.io/s/f/0xp3czbb3cws3.js"></script> -->
 
 
 
